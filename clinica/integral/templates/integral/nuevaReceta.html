@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript" src="{%static 'js/jquery-3.2.1.min.js'%}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$('#enviar').click(function(e){
+    		e.preventDefault();
+        		var dataString = $('#form-control').serialize();
+
+        	//alert('Datos serializados: '+dataString);
+
+        	$.ajax({
+            	type: "POST",
+            	url: '',
+            	data: dataString,
+            	success: function(data) {
+            	window.location.replace("/RecetasMedica/{{consultaId}}");
+            	}
+        	});
+    	});
+	});
+</script>
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>{{ consulta.fk_consulta_expediente.paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+				<form id="form-control" method="POST">
+					{%csrf_token%}
+					<table>
+
+						<tr>
+							<td>Fecha de prescripción: <input type="date" id="fechaActual" name="fechaActual"></td>
+						</tr>
+						<tr>
+							<td>Hora de prescripción: <input type="time"  id="horaActual" name="horaActual"></td>
+						</tr>
+						<tr>
+							<td>Medicamento: <input type="text"  id="MedicamentoPaciente" name="MedicamentoPaciente"></td>
+						</tr>
+						<tr>
+							<td>Indicaciones: <input type="text" id="IndicacionesPaciente" name="IndicacionesPaciente"></td>
+						</tr>
+					</table>
+					<input type="submit" value="Guardar"  id="enviar" name="enviar" ></a>
+					<a  class="button" href="/ConsultasMedica/{{consulta.fk_consulta_expediente.id}}">Regresar</a>
+				</form>
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript" src="{%static 'js/jquery-3.2.1.min.js'%}"></script>
+<script type="text/javascript">
+function printDiv(nombreDiv) {
+     var contenido= document.getElementById(nombreDiv).innerHTML;
+     var contenidoOriginal= document.body.innerHTML;
+
+     document.body.innerHTML = contenido;
+
+     window.print();
+
+     document.body.innerHTML = contenidoOriginal;
+}
+</script>
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>{{ paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+          <div id="areaImprimir2">
+            <div class="4u"><span class="image fit">
+              <img  style="width:100px;" src="{%static 'images/UES.png'%}" alt="">
+            </span>
+          </div>
+            <p><strong>Paciente: </strong> {{expediente.paciente}}</p>
+            <p><strong>Fecha:</strong> {{consulta.fecha}}</p>
+              {% for detalle in receta%}
+              <p><strong>Medicamento: </strong>{{detalle.medicamento}}</p>
+              <p><strong>Indicaciones: </strong>{{detalle.indicaciones}}</p>
+              <br>
+              
+              <hr>
+              {% endfor%}
+              <p><strong>Firma: </strong> _____________________</p>
+
+          </div>
+        <a class="button" href="/detalleConsulta/{{consultaId}}/{{ expediente.id }}">Ir a consulta</a>
+        <input type="button" onclick="printDiv('areaImprimir2')" value="Imprimir Receta Medica" />
+        <a class="button" href="/RecetasMedica/{{consulta.id}}">Regresar</a>
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock content %}

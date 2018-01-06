@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!-- Banner -->
+	<section id="banner">
+		<h2>Clinica Medica Integral</h2>
+		<p>¡Bienvenido!</p>
+	</section>
+
+<!-- One -->
+	<section id="one" class="wrapper style1 special">
+		<div class="container">
+			<header class="major">
+				<h2>Menú</h2>
+				<p>Selecciones una acción:</p>
+			</header>
+			<div class="row 150%">
+				<div class="6u 12u$(medium)">
+					<section class="box">
+						<i class="icon big rounded color1 fa-cloud"></i>
+						<h3>Pacientes</h3>
+						<p>Ver, agregar o eliminar pacientes</p>
+						<a class="button" href="{% url 'integral:listarPaciente' %}">Pacientes</a>
+					</section>
+				</div>
+				<div class="6u 12u$(medium)">
+					<section class="box">
+						<i class="icon big rounded color9 fa-desktop"></i>
+						<h3>Expedientes</h3>
+						<p>Ver consultas y antecedentes de los pacientes</p>
+						<a class="button" href="{% url 'integral:expedientes' %}">Expedientes</a>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>Antecedentes de {{ expe.paciente}}</h3>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+				{% if messages %}
+				{% for message in messages %}
+				{% if message.tags == 'success' %}
+				<p style="color: green"> <u>{{ message }}</u></p>
+						{% else %}
+				<p style="color: red"><u>{{ message }}</u> </p>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
+				{% for error in form.non_field_errors %}
+				<div class="alert alert-danger" >
+					<strong style="color: red">{{ error|escape }}</strong>
+				</div>
+				{% endfor %}
+				<a class="button" href="/nuevoAntecedente/{{expedienteId}}">Agregar Antecedente</a>
+				<hr>
+				<table>
+					<tr>
+						<td>ID</td>
+						<td>Enfermedad</td>
+						<td>Ver Detalles</td>
+					</tr>
+					{% for antecedente in antecedentes %}
+					<tr>
+						<td>{{ antecedente.id}}</td>
+						<td>{{antecedente.enfermedad}}</td>
+						<td><a class ="button" href="/detalleAntecedente/{{antecedente.id}}/{{expedienteId}}">Ver</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+            <a class="button" href="/expediente/">Regresar</a>
+		 </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

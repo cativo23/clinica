@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>{{ paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+				{% if messages %}
+				{% for message in messages %}
+				{% if message.tags == 'success' %}
+				<p style="color: green"> <u>{{ message }}</u></p>
+						{% else %}
+				<p style="color: red"><u>{{ message }}</u> </p>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
+				{% for error in form.non_field_errors %}
+				<div class="alert alert-danger" >
+					<strong style="color: red">{{ error|escape }}</strong>
+				</div>
+				{% endfor %}
+				<a class="button" href="/nuevaReceta/{{consulta.id}}">Agregar Receta Medica</a>
+				<table>
+					<tr>
+						<td>#</td>
+						<td>Medicamento</td>
+						<td>Ver Detalles</td>
+					</tr>
+					{% for receta in recetaMedica%}
+					<tr>
+						<td>{{receta.id}}</td>
+						<td><p>{{receta.medicamento}}</p></td>
+						<td><a class="button" href="/detalleReceta/{{receta.id}}/{{consulta.id}}">Detalle Receta</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+
+            <a class="button" href="/detalleConsulta/{{consulta.id}}/{{consulta.fk_consulta_expediente.id}}">Regresar</a>
+						<a class="button" href="/detalleRecetas/{{consulta.id}}">Imprimir receta completa</a>
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

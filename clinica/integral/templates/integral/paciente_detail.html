@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>{{ paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+        <ul class="alt">
+            <li><p><b>Fecha Nacimiento:</b> {{ paciente.fecha_nacimiento }}</p></li>
+            <li><p><b>Telefono:</b>{{ paciente.telefono }}</p></li>
+            <li><p><b>Direccion:</b>{{ paciente.direccion }}</p></li>
+        </ul>
+
+            <a class="button" href="{% url "integral:listarPaciente" %}">Regresar</a>
+		 </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

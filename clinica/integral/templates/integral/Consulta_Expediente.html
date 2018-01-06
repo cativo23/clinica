@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h2>Consultas del paciente</h2>
+      <p>Aqui puede ver todas las consultas del paciente y Asignar receta</p>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <p style="color: green"> <u>{{ message }}</u></p>
+            {% else %}
+        <p style="color: red"><u>{{ message }}</u> </p>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger" >
+          <strong style="color: red">{{ error|escape }}</strong>
+        </div>
+        {% endfor %}
+				<a class="button" href="/nuevaConsulta/{{expedienteId}}">Agregar Consulta</a>
+		    <a  class="button" href="{% url 'integral:expedientes' %}">Regresar</a>
+				{% if  consultaMedica%}
+				<table>
+					<tr>
+            <td>#</td>
+            <td>Fecha</td>
+						<td>Detalle</td>
+						<td>Receta</td>
+
+					</tr>
+					{% for consulta in consultaMedica%}
+					<tr>
+            <td>{{consulta.id}}</td>
+            <td>{{consulta.fecha}}</td>
+						<td><a class="button" href="/detalleConsulta/{{consulta.id}}/{{expedienteId}}">Detalle Consulta</a></td>
+						<td><a class="button" href="/nuevaReceta/{{consulta.id}}">Asignar Nueva Receta</a></td>
+
+					</tr>
+					{% endfor %}
+				</table>
+				{% else %}
+				<p> <strong> No hay consulta, agrege una nueva. </strong></p>
+				{% endif %}
+
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

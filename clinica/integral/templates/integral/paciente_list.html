@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h2>Pacientes</h2>
+      <p>Aqui puede ver los pacientes:</p>
+    </header>
+    <div class="row 150%">
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'success' %}
+      <p style="color: green"> <u>{{ message }}</u></p>
+          {% else %}
+      <p style="color: red"><u>{{ message }}</u> </p>
+      {% endif %}
+      {% endfor %}
+      <p></p>
+      {% endif %}
+      <div class="table-wrapper">
+        <p><a class="button" href="{% url 'integral:nuevoPaciente' %}">Agregar paciente</a></p>
+        <p><a class="button" href="{% url 'integral:index' %}">Regresar</a></p>
+        <table>
+          <thead>
+            <tr>
+              <td><b>Paciente</b></td>
+              <td><b>Fecha Nacimiento</b></td>
+              <td><b>Telefono</b></td>
+              <td><b>Direccion</b></td>
+              <td><b>Ver</b></td>
+              <td><b>Eliminar</b></td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for paciente in object_list %}
+            <tr>
+              <td>{{ paciente.nombre }}</td>
+              <td>{{ paciente.fecha_nacimiento}}</td>
+              <td>{{ paciente.telefono}}</td>
+              <td>{{ paciente.direccion}}</td>
+              <td><a class="button" href="{% url 'integral:detallePaciente' paciente.id %}">Ver</a></td>
+              <td><a class="button" href="{% url 'integral:eliminarPaciente' paciente.id %}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
