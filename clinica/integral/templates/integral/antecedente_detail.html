@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>Antecedente de {{ paciente.paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+        <ul class="alt">
+					<table>
+						<tr>
+							<td><b>Paciente</b></td>
+							<td><b>Enfermedad</b></td>
+							<td><b>Familiar con misma Enfermedad</b></td>
+							<td><b>Tratamiento</b></td>
+							<td><b>Medicamento</b></td>
+						</tr>
+						<tr>
+						<td>{{pacienteDato}}</td>
+						<td>{{antecedente.enfermedad}}</td>
+						<td>{{antecedente.familiar}}</td>
+						<td>{{antecedente.tratamiento}}</td>
+						<td>{{antecedente.medicamento_asignado}}</td>
+						</tr>
+
+					</table>
+
+					<a class="button" href="/antecedentes/{{expedienteId}}/">Regresar</a>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

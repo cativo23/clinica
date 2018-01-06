@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h2>Ingrese un nuevo paciente</h2>
+      <p>Llene todos los datos correctamente</p>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+		    <a  class="button" href="{% url 'integral:listarPaciente' %}">Regresar</a>
+					<div id="nuevoPacient">
+						<form action="" method="post" id="nuevoPacienteForm">
+							{% csrf_token %}
+							{{form.as_p}}
+							<input type="submit" value="Guardar" id="btnGuardarPaciente">
+						</form>
+					</div>
+		        <div id="asigExp"></div>
+				<div id="antecedentes"></div>
+		 </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

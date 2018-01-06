@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript" src="{%static 'js/jquery-3.2.1.min.js'%}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$('#enviar').click(function(e){
+    		e.preventDefault();
+        		var dataString = $('#form-control').serialize();
+
+        	//alert('Datos serializados: '+dataString);
+
+        	$.ajax({
+            	type: "POST",
+            	url: '',
+            	data: dataString,
+            	success: function(data) {
+            	window.location.replace("/antecedentes/{{expedienteId}}");
+            	}
+        	});
+    	});
+	});
+</script>
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>Nuevo Antecedente</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+
+				<form id="form-control" method="POST">
+					{%csrf_token%}
+					<table>
+
+						<tr>
+							<td>Enfermedad que padece:<input type="text" id="enfermedad" name="enfermedad"></td>
+						</tr>
+						<tr>
+							<td>Familiar con la misma enfermedad?:<input type="text"  id="familiar" name="familiar"></td>
+						</tr>
+						<tr>
+							<td>Tratamiento:<input type="text"  id="tratamiento" name="tratamiento"></td>
+						</tr>
+						<tr>
+							<td>Medicamento:<input type="text" id="medicamento_asignado" name="medicamento_asignado"></td>
+						<td><input type="hidden" name="expedienteId" id="expedienteId" value="{{expedienteId}}"></td>
+						</tr>
+					</table>
+					<input type="submit" value="Guardar"  id="enviar" name="enviar" >
+					<a class="button" href="{% url 'integral:antecedentes' expedienteId %}">Regresar</a>
+				</form>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<script type="text/javascript" src="{%static 'js/jquery-3.2.1.min.js'%}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+    	$('#enviar').click(function(e){
+    		e.preventDefault();
+        		var dataString = $('#form-control').serialize();
+
+        	// alert('Datos serializados: '+dataString);
+
+        	$.ajax({
+            	type: "POST",
+            	url: '',
+            	data: dataString,
+            	success: function(data) {
+            	window.location.replace("/ConsultasMedica/{{expedienteId}}");
+            	}
+        	});
+    	});
+	});
+</script>
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>Nueva Consulta del paciente <em>{{paciente}}</em></h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+					<form id="form-control" method="POST">
+						{%csrf_token%}
+						<table>
+
+							<tr>
+								<td>Fecha de Consulta: <input type="date" id="fechaActual" name="fechaActual"></td>
+							</tr>
+							<tr>
+								<td>Hora de Consulta: <input type="time"  id="horaActual" name="horaActual"></td>
+							</tr>
+							<tr>
+								<td>Peso: <input type="number"  id="PesoPaciente" step="0.1" name="PesoPaciente"></td>
+							</tr>
+							<tr>
+								<td> Talla: <input type="number" name="TallaPaciente" step="0.1" id=TallaPaciente></td>
+							</tr>
+							<tr>
+								<td>Tension Arterial: <input type="text"  id="TensionArterial" name="TensionArterial"></td>
+							</tr>
+							<tr>
+								<td>Frecuencia Cardiaca: <input type="number"  id="FrecuenciaCardiaca" name="FrecuenciaCardiaca"></td>
+							</tr>
+							<tr>
+								<td>Problema: <input type="text"  id="ProblemaEnfermedad" name="ProblemaEnfermedad"></td>
+							</tr>
+							<tr>
+								<td>Diagnostico: <input type="text" id="DiagnosticoEnfermedad" name="DiagnosticoEnfermedad"></td>
+							</tr>
+							<tr>
+								<td>Precio de Consulta: <input type="number"  id="PrecioConsulta" step="0.1" name="PrecioConsulta"></td>
+							</tr>
+							<tr>
+								<td>Expediente: <input type=""  id="expediente" value="{{expedienteId}}" readonly="readonly" name="expediente"></td>
+							</tr>
+							<tr>
+								<td>Fecha de Proxima Consulta: <input type="date" id="fechaProxActual" name="fechaProxActual"></td>
+							</tr>
+							<tr>
+								<td>Hora de Proxima Consulta: <input type="time" id="horaProxActual" name="horaProxActual"></td>
+							</tr>
+						</table>
+						<input type="submit"  value="Enviar"  id="enviar" >
+						<a  class="button" href="/ConsultasMedica/{{expedienteId}}">Regresar</a>
+        </form>
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

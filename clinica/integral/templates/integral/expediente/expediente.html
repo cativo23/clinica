@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+			<h2>Asignación de Expedientes</h2>
+		  <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+						<h3>Buscar</h3>
+						<table class="table-bordered">
+							<tr>
+								<td>ID</td>
+								<td>Paciente</td>
+								<td>Fecha de apertura</td>
+								<td>Ver Consultas</td>
+                <td>Antecedentes</td>
+							</tr>
+							{% for expedientes in expedientes %}
+							<tr>
+								<td>{{expedientes.id}}</td>
+			          <td>{{expedientes.paciente}}</td>
+			          <td>{{expedientes.fecha_apertura}}</td>
+			          <td><a class="button" href="/ConsultasMedica/{{expedientes.id}}">Ver</a></td>
+                <td><a class="button" href="/antecedentes/{{expedientes.id}}">Ver</a></td>
+			        </tr>
+			        {% endfor%}
+			        <div class="pagination">
+								<span class="step-links">
+									{% if expedientes.has_previous %}
+									<a href="?page={{ expedientes.previous_page_number }}">Anterior</a>
+									{% endif %}
+									<span class="current">Página {{expedientes.number}} de {{expedientes.paginator.num_pages}}.</span>
+			            {% if expedientes.has_next %}
+			            <a href="?page={{expedientes.next_page_number}}">Siguiente</a>
+			            {% endif %}
+			          </span>
+							</div>
+						</table>
+            <a class="button" href="{% url 'integral:index'%}">Regresar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+{% endblock content %}

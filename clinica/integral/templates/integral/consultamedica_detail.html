@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>Paciente: {{ nombre }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+				<table>
+					<tr>
+						<td><b>Paciente</b></td>
+						<td><b>Consulta</b></td>
+						<td><b>Fecha</b></td>
+						<td><b>Hora</b></td>
+						<td><b>Peso</b></td>
+						<td><b>Talla</b></td>
+						<td><b>Tension Arterial</b></td>
+						<td><b>Frecuencia Cardiaca</b></td>
+						<td><b>Problema</b></td>
+						<td><b>Diagnostico</b></td>
+
+					</tr>
+
+
+				{% for detalle in consultaMedica %}
+				{% for pacienteDato in paciente %}
+
+					<tr>
+					<td>{{pacienteDato}}</td>
+					<td>{{detalle.id}}</td>
+					<td>{{detalle.fecha}}</td>
+					<td>{{detalle.hora}}</td>
+					<td>{{detalle.peso}}</td>
+					<td>{{detalle.talla}}</td>
+					<td>{{detalle.ta}}</td>
+					<td>{{detalle.fc}}</td>
+					<td>{{detalle.problema}}</td>
+					<td>{{detalle.diagnostico}}</td>
+					</tr>
+				</table>
+					<h3>Proximo Control:</h3>
+					<ul class="alt">
+						<li>Hora:{{detalle.hora_prox_control}}</li>
+						<li>Fecha: {{detalle.fecha_prox_control}}</li>
+					</ul>
+					<p><strong>Precio Consulta: {{detalle.precio_consulta}}</strong></p>
+				<a class="button" href="/ConsultasMedica/{{expedienteId}}/">Regresar</a>
+				<a class="button" href="/RecetasMedica/{{conId}}/">Ver Receta</a>
+				{% endfor %}
+				{% endfor %}
+		 </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% endblock content %}

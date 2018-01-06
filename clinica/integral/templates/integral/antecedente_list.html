@@ -1,0 +1,18 @@
+{% block content %}
+<table>
+	<tr>
+		<td>Enfermedad</td>
+		<td>Familiar</td>
+		<td>Tratamiento</td>
+		<td>Medicamento Asignado</td>
+	</tr>
+{% for antecedente in antecedentes %}
+        <tr>
+            <td>{{ antecedente.enfermedad}}</td>
+            <td>{{ antecedente.familiar}}</td>
+            <td>{{ antecedente.tratamiento}}</td>
+            <td>{{ antecedente.medicamento_asignado}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

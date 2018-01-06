@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="main" class="wrapper">
+  <div class="container">
+    <header class="major">
+      <h3>{{ paciente }}</h3>
+      <hr>
+    </header>
+    <div class="row 150%">
+			<div class="container">
+        <form method="post">{% csrf_token %}
+            <p>¿Estás seguro que deseas borrar La consulta "{{ object }}"?</p>
+            <input type="submit" value="SI" />
+            <a class="button" href="/ConsultasMedica/{{object.fk_consulta_expediente.id}}">No</a>
+        </form>
+        </p>
+		 </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
